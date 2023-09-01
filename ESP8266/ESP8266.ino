@@ -3,7 +3,9 @@
 
 const char* ssid = "Truong*Thang";
 const char* password = "22112001";
-
+IPAddress staticIP(192, 168, 1, 100);  // Địa chỉ IP tĩnh bạn muốn đặt
+IPAddress gateway(192, 168, 1, 1);    // Cổng mặc định của router
+IPAddress subnet(255, 255, 255, 0);    // Mặt nạ mạng
 IPAddress broadcastIP(192, 168, 1, 255);
 const int proxyPort1 = 9;      // Replace with your desired proxy port 1
 const int proxyPort2 = 20388;  // Replace with your desired proxy port 2
@@ -23,6 +25,8 @@ void setup() {
   }
   Serial.println("\nWiFi connected");
   Serial.print("IP address: ");
+   // Thiết lập địa chỉ IP tĩnh
+  WiFi.config(staticIP, gateway, subnet);
   Serial.println(WiFi.localIP());
   udp1.begin(proxyPort1);  // Local port to listen for incoming UDP packets on port 1
   udp2.begin(proxyPort2);  // Local port to listen for incoming UDP packets on port 2
